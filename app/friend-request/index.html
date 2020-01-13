@@ -1,0 +1,34 @@
+﻿<div class="container">
+	<div ng-if="vm.user.friendrequestsreceived.length == 0">
+		<h1>You don't have any friend request yet!!</h1>
+	</div>
+	<div class="addon">
+		<ul>
+			<li class="clearfix" ng-repeat="user in vm.user.friendrequestsreceived">
+				<div class="row profile">
+					<div class="col-md-8">
+						<a ui-sref="profile({ id: user._id })">
+							<img class="round" ng-src="/photo/{{user.avatar}}">
+							<div class="legend-info">
+								<strong>{{user.name}}</strong>
+								<div ng-if="user.address">
+									Live at {{user.address}}
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-success btn-sm" ng-click="vm.acceptFriendRequest(user._id)">
+							<i class="glyphicon glyphicon-ok"></i>
+							Accept Request
+						</button>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="vm.declineFriendRequest(user._id)">
+							<i class="glyphicon glyphicon-remove"></i>
+							Decline Request
+						</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

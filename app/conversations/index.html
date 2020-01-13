@@ -1,0 +1,45 @@
+﻿<div class="container">
+	<button type="button" class="btn btn-primary" ng-click="vm.createConversation()">
+		<i class="glyphicon glyphicon-plus"></i>
+		Create new chat group
+	</button>
+	<div class="addon">
+		<ul>
+			<li class="clearfix" ng-repeat="conversation in vm.conversations">
+				<div class="row profile">
+					<div class="col-md-8">
+						<a ui-sref="conversationContent({ id: conversation._id })">
+							<img class="round" ng-src="/photo/{{conversation.avatar}}">
+							<div class="legend-info">
+								<strong>{{conversation.name}}</strong>
+								<div class="message">
+									{{conversation.lastmessage}}
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-primary btn-sm" ng-click="vm.viewConversationSetting(conversation._id)">
+							<i class="glyphicon glyphicon-cog"></i>
+							Setting
+						</button>
+						<button type="button" class="btn btn-primary btn-sm" ng-click="vm.viewConversationMembers(conversation._id)">
+							<i class="glyphicon glyphicon-user"></i>
+							Invite friends
+						</button>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="vm.deleteConversation(conversation._id)">
+							<i class="glyphicon glyphicon-trash"></i>
+							Delete
+						</button>
+						<div ng-if="(vm.conversation.members.length > 1) && (vm.conversation.isCumstomChat)">
+							<button type="button" class="btn btn-warning btn-sm" ng-click="vm.leaveConversation(conversation._id)">
+								<i class="glyphicon glyphicon-log-out"></i>
+								Leave
+							</button>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+﻿{
+    "connectionString": "mongodb://desulti:kiet1234@cluster0-shard-00-00-ebk3u.mongodb.net:27017,cluster0-shard-00-01-ebk3u.mongodb.net:27017,cluster0-shard-00-02-ebk3u.mongodb.net:27017/social-network?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "apiUrl": "http://localhost:3000/api",
+    "secret": "Desulti"
+}

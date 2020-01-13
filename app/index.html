@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Desulti Social Network</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="app-content/app.css" rel="stylesheet" />
+    <link href="app-content/conversation.css" rel="stylesheet" />
+    <link href="app-content/message.component.css" rel="stylesheet" />
+    <link href="app-content/message-list.component.css" rel="stylesheet" />
+    <link href="app-content/header.css" rel="stylesheet" />
+	<link href="app-content/profile.css" type="text/css" rel="stylesheet">
+</head>
+<body class="container">
+    <!-- header -->
+    <nav class="navbar navbar-inverse header">
+		<div class="container-fluid" >
+			<ul class="nav navbar-nav">
+				<li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
+				<li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+			</ul>
+			<form class="navbar-form navbar-left">
+				<div class="input-group" ng-init="searchfield='name'">
+					<input type="text" id="search" name="search" class="form-control" value="" placeholder="Search" ng-model="searchvalue">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<a ui-sref="search({ key: searchfield, value: searchvalue })">
+								<i class="glyphicon glyphicon-search"></i>
+							</a>
+						</button>
+					</div>
+				</div>
+				<select class="form-control" ng-model="searchfield">
+					<option value="name">Name</option>
+					<option value="username">Username</option>
+					<option value="phoneNumber">Phone Number</option>
+					<option value="email">Email</option>
+				</select>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-class="{active: activeTab === 'conversations'}"><a ui-sref="conversations">Conversations</a></li>
+				<li ng-class="{active: activeTab === 'friendReqests'}"><a ui-sref="friendReqests">Friend Requests</a></li>
+				<li><a ui-sref="profile({ id: userID })"><img ng-src="/photo/{{avatar}}" class="img-circle avatar">Hello, {{name}}</a></li>
+				<li><a href="/login" target="_self"><span class="glyphicon glyphicon-off"></span> </a></li>
+			</ul>
+		</div>
+		<div class="flash-message" ng-if="flash">
+			<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+		</div>
+    </nav>
+
+    <!-- main -->
+    <main ui-view></main>
+
+    <!-- footer -->
+    <footer></footer>
+
+    <!-- external scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+    <!-- application scripts -->
+    <script src="app.js"></script>
+    <script src="app-services/user.service.js"></script>
+    <script src="app-services/conversation.service.js"></script>
+    <script src="app-services/message.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="home/index.controller.js"></script>
+    <script src="account/index.controller.js"></script>
+    <script src="profile/index.controller.js"></script>
+    <script src="profile-content/index.controller.js"></script>
+    <script src="friend-list/index.controller.js"></script>
+    <script src="friend-request/index.controller.js"></script>
+    <script src="search/index.controller.js"></script>
+    <script src="conversations/index.controller.js"></script>
+    <script src="conversation-content/index.controller.js"></script>
+	<script src='bower_components/angular-upload/angular-upload.min.js'></script>
+</body>
+</html>

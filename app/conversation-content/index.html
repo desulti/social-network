@@ -1,0 +1,59 @@
+﻿<h1>{{vm.conversation.name}}</h1>
+<div class="form-group">
+	<button class="btn btn-primary" ng-click="vm.viewConversationSetting()">
+		Setting
+	</button>
+	<button class="btn btn-primary" ng-click="vm.viewConversationMembers()">
+		Add member
+	</button>
+</div>
+<div class="container row-small-margin-top-bottom">
+	<div>
+		<div class="form-group">
+			<input name="content" id="content" placeholder="Enter a message" type="text" class="form-control" ng-model="vm.content" />
+		</div>
+		<div class="form-group">
+			<button ng-disabled="(vm.content=='')&&(vm.file==null)" class="btn btn-primary" ng-click="vm.sendMessage()">
+				Send Message
+			</button>
+		</div>
+		<div class="form-group">
+			<label for="myfile">Add file</label>
+			<input type="file" name="myfile" id="myfile" multiple file-upload />
+		</div>
+	</div>
+	<div class="chat-room" >
+		<div ng-repeat="message in vm.messages">
+			<div class="msg-card msg-card-left" ng-if="message.senderId!=vm.user._id" >
+				<div class="msg-card-body">
+					<div ng-if="message.content.text">
+						{{message.content.text}}
+					</div>
+					<div ng-if="message.content.file">
+						<a href="">{{message.content.file}}</a>
+					</div>
+				</div>
+				<footer class="msg-card-footer">
+					<div class="msg-author">
+						{{message.username}}
+					</div>
+				</footer>
+			</div>
+			<div class="msg-card msg-card-right" ng-if="message.senderId==vm.user._id" >
+				<div class="msg-card-body">
+					<div ng-if="message.content.text">
+						{{message.content.text}}
+					</div>
+					<div ng-if="message.content.file">
+						<a href="">{{message.content.file}}</a>
+					</div>
+				</div>
+				<footer class="msg-card-footer">
+					<div class="msg-author">
+						{{message.username}}
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+</div>

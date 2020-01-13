@@ -1,0 +1,20 @@
+﻿<div class="container">
+	<div ng-if="vm.result.length == 0">
+		<h1>No result found!!!</h1>
+	</div>
+	<div class="addon">
+		<ul>
+			<li class="clearfix" ng-repeat="user in vm.result">
+				<a ui-sref="profile({ id: user._id})">
+					<img class="round" ng-src="/photo/{{user.avatar}}">
+					<div class="legend-info">
+						<strong>{{user.name}}</strong>
+						<div ng-if="user.address">
+							Live at {{user.address}}
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

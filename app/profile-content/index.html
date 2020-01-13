@@ -1,0 +1,14 @@
+﻿<div class="profile-content">
+	<div ng-if="vm.targetUser.address">
+		<i class="glyphicon glyphicon-home"></i>
+		Live at {{vm.targetUser.address}}
+	</div>
+	<div ng-if="vm.targetUser.phoneNumber">
+		<i class="glyphicon glyphicon-earphone"></i>
+		Phone Number: {{vm.targetUser.phoneNumber}}
+	</div>
+	<div ng-if="vm.targetUser.email">
+		<i class="glyphicon glyphicon-envelope"></i>
+		Email: {{vm.targetUser.email}}
+	</div>
+</div>
