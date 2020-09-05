@@ -13,7 +13,7 @@
         "bower": "^1.8.8",
         "ejs": "^2.3.3",
         "express": "^4.13.0",
-        "express-fileupload": "^1.1.6",
+        "express-fileupload": "^1.1.9",
         "express-jwt": "^3.0.1",
         "express-session": "^1.11.3",
         "jsonwebtoken": "^5.0.2",
