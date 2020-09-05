@@ -3,6 +3,8 @@ var router = express.Router();
 var request = require('request');
 var config = require('config.json');
 
+const apiUrl = (process.env.NODE_ENV ? config.apiUrl2 : config.apiUrl1);
+
 router.get('/', function (req, res) {
     res.render('register');
 });
@@ -35,7 +37,7 @@ router.post('/', function (req, res) {
 	
     // register using api to maintain clean separation between layers
     request.post({
-		url: config.apiUrl + '/users/register',
+		url: apiUrl + '/users/register',
 		form: user,
 		json: true
 	}, function (error, response, body) {
