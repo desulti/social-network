@@ -37,4 +37,20 @@ var server = app.listen((process.env.PORT || 3000), function () {
 
 // start socket io
 var io = socket.listen(server);
-io.sockets.on('connection', function(socket) { /* something */ });
+io.sockets.on('connection', function(socket) {
+	// 'join event'
+	socket.on('join', function(data) {
+		socket.join(data.room);
+		console.log('Room joined');
+	});
+	// catching the message event
+	socket.on('message', function(message) {
+		// emitting the 'new message' event to the clients in that room with id
+		io.in(message.conversationId).emit('new message', message);
+	});
+	// Event when a client is typing
+	socket.on('typing', function(data) {
+		// Broadcasting to all the users except the one typing
+		socket.broadcast.in(data.room).emit('typing', {data: data, isTyping: true});
+	});
+});

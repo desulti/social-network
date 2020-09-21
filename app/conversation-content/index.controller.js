@@ -5,7 +5,7 @@
         .module('app')
         .controller('ConversationContent.IndexController', Controller);
 
-    function Controller($state, $scope, UserService, ConversationService, MessageService, FlashService) {
+    function Controller($state, $scope, UserService, ConversationService, MessageService, FlashService, socket) {
         var vm = this;
 
         vm.user = null;
@@ -34,6 +34,9 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+			
+				//join the room
+				socket.emit('join', {user:vm.user.name, room:$state.params.id});
 				
 				//get current conversation
 				ConversationService.GetById($state.params.id).then(function (conversation) {
@@ -58,6 +61,11 @@
             });
         }
 		
+		//Socket listeners
+		socket.on('new message', function (message) {
+			vm.messages.unshift(message);
+		});
+		
 		function sendMessage() {
 			if (vm.content != "") {
 				var content = {
@@ -72,7 +80,8 @@
 				
 				MessageService.Create(message)
 					.then(function () {
-						vm.messages.unshift(message);
+						//vm.messages.unshift(message);
+						socket.emit('message', message);
 						if (vm.file != null) {
 							content = {
 								file: vm.file.name
@@ -86,7 +95,8 @@
 							
 							MessageService.Create(message, vm.file)
 								.then(function () {
-									vm.messages.unshift(message);
+									//vm.messages.unshift(message);
+									socket.emit('message', message);
 									vm.file = null;
 									FlashService.Success('File sent');
 								})
@@ -115,7 +125,8 @@
 				
 				MessageService.Create(message, vm.file)
 					.then(function () {
-						vm.messages.unshift(message);
+						//vm.messages.unshift(message);
+						socket.emit('message', message);
 						vm.file = null;
 						FlashService.Success('File sent');
 					})
